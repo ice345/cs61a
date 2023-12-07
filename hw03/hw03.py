@@ -25,6 +25,20 @@ def num_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if(n<8):
+        return 0
+    if(n%10!=8):
+        return num_eights(n//10)
+    if(n%10==8):
+        return 1+num_eights(n//10)
+"""
+if n==0:
+    return 0
+last_digit =n%10
+count=1 if last_digit==8 else 0
+return count+num_eights(n//10)这种也行，但好像在这这里会在他的检测系统有些问题
+之前我写的那个，没重复一次，total会自定义为0，这样根本计算不了
+"""
 
 
 def digit_distance(n):
@@ -47,6 +61,13 @@ def digit_distance(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    total = 0
+    if(n>=10):
+        total=abs(n%10-n//10%10)
+        return total+digit_distance(n//10)
+    else:
+        return total
+    
 
 
 def interleaved_sum(n, odd_term, even_term):
@@ -69,6 +90,11 @@ def interleaved_sum(n, odd_term, even_term):
     True
     """
     "*** YOUR CODE HERE ***"
+    def interleaved_sum_1(term1, term2,k):
+        if(n==k):
+            return term1(k)
+        return term1(k)+interleaved_sum_1(term2,term1,k+1)#这真的是轮回交换term1和term2函数，没想到
+    return interleaved_sum_1(odd_term,even_term,1)
 
 
 def next_larger_coin(coin):
@@ -123,7 +149,21 @@ def count_coins(total):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    def helper(largestcoin,total):
+        if total<0 or largestcoin==0 or largestcoin==None:
+            return 0
+        elif(total==0):
+            return 1
+        a=helper(largestcoin,total-largestcoin)
+        b=helper(next_smaller_coin(largestcoin),total)
+        return a+b
+    return helper(25,total)
+"""
+总体思路就是这个从大往小的理解好，例如30的硬币，你使用最大面值25，或不用就是下一层15，用了15
+，剩下的面额通过下面的面额来凑，就是不断往下的意思吧，这整体思路就是通过一个函数搞出总的，以及最大
+面额，然后层层往下，直到达到结束语句（就是base case），确实，total==0时就是你已经不用找了，就是
+一种方法
+"""
 
 def print_move(origin, destination):
     """Print instructions to move a disk."""

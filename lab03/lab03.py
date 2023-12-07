@@ -63,12 +63,12 @@ def get_k_run_starter(n, k):
     """
     i = 0
     final = None
-    while ____________________________:
-        while ____________________________:
-            ____________________________
-        final = ____________________________
-        i = ____________________________
-        n = ____________________________
+    while i<=k :
+        while n%10>n//10%10 and n>1:#这里不补充n>1会使得最后那个会变为0，例如123444345（3）最后就是0了
+            n=n//10 
+        final = n%10
+        i =i+1
+        n = n//10
     return final
 
 
@@ -93,7 +93,19 @@ def nearest_two(x):
     """
     power_of_two = 1.0
     "*** YOUR CODE HERE ***"
-
+    i=0
+    if(x>=1):
+        while(abs(pow(2.0,i)-x)>=abs(pow(2.0,i+1)-x)):
+            i+=1
+        #if(abs(pow(2.0,i)-x)==abs(pow(2.0,i+1)-x)):
+            #power_of_two=pow(2.0,i+1) 只能不断debug才行吗？
+        power_of_two=pow(2.0,i)
+    elif(x<1):
+        while(abs(pow(2.0,i)-x)>abs(pow(2.0,i-1)-x)):
+            i-=1
+        if(abs(pow(2.0,i)-x)==abs(pow(2.0,i-1)-x)):
+            power_of_two=pow(2.0,i)
+        power_of_two=pow(2.0,i)
     return power_of_two
 
 
@@ -185,7 +197,7 @@ def div_by_primes_under_no_lambda(n):
             def outer(____________________________):
                 def inner(____________________________):
                     return ____________________________
-                return ____________________________
+                return 
             checker = ____________________________
         i = ____________________________
     return ____________________________

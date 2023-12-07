@@ -197,6 +197,12 @@ def count_coins(total):
         with_coin = constrained_count_small(total - largest_coin, largest_coin)
         return without_coin + with_coin
     return constrained_count_small(total, 25)
+"""
+总体思路就是这个从大往小的理解好，例如30的硬币，你使用最大面值25，或不用就是下一层15，用了15
+，剩下的面额通过下面的面额来凑，就是不断往下的意思吧，这整体思路就是通过一个函数搞出总的，以及最大
+面额，然后层层往下，直到达到结束语句（就是base case），确实，total==0时就是你已经不用找了，就是
+一种方法
+"""
 
 
 def print_move(origin, destination):

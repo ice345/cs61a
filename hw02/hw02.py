@@ -101,13 +101,14 @@ def summation_using_accumulate(n, term):
     ['Expr', 'Return']
     """
     "*** YOUR CODE HERE ***"
+    def accumulate(meger,start,n,term):
+        total,k=start,1
+        while k<=n:
+            total=meger(total,term(k))
+            k=k+1
+        return total
     return accumulate(add,0,n,term)
-def accumulate(meger,start,n,term):
-     total,k=start,1
-     while k<=n:
-          total=meger(total,term(k))
-          k=k+1
-     return total
+
 
 
 
@@ -222,7 +223,7 @@ def mod_maker():
     >>> check(HW_SOURCE_FILE, 'mod_maker', ['If', 'IfExp']) # no if / if-else statements
     True
     """
-    return lambda x,y:x%y
+    return lambda x,y:x%y#其实就是返回了一个函数表达式，你用mod来接一个表达式，再传入参数，这样就可以理解了
 
 
 def lambda_math_syntax_check():
