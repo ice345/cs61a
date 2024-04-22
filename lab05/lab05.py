@@ -22,6 +22,19 @@ def berry_finder(t):
         if berry_finder(b):
             return True
     return False
+"""
+    stack = [t]
+    while stack:
+        node = stack.pop()
+        if label(node) == 'berry':
+            return True
+        stack.extend(branches(node))
+    return False
+
+    这个版本使用了一个栈来迭代地遍历树的节点。如果节点的值是 "berry"，则返回 True
+    否则将节点的所有子节点加入栈中。如果遍历完整个树都没有找到 "berry"，则返回 False。
+"""
+
 
 
 def replace_loki_at_leaf(t, lokis_replacement):
@@ -55,10 +68,10 @@ def replace_loki_at_leaf(t, lokis_replacement):
     """
     "*** YOUR CODE HERE ***"
     if is_leaf(t) and label(t)=="loki":
-        return tree(lokis_replacement)
+        return tree(lokis_replacement)#递归基础条件
     else:
         new_branch=[replace_loki_at_leaf(n,lokis_replacement) for n in branches(t)]#这样n就是变成一开始的分支作为根节点
-        return tree(label(t),new_branch)#返回这样的树，知道达到叶节点
+        return tree(label(t),new_branch)#返回这样的树，知道达到叶节点，树因为也是要变的
 
 
 
@@ -272,7 +285,7 @@ def dejavu(t, n):
     """
     "*** YOUR CODE HERE ***"
     def sum_node(t, target, current_sum):
-        if is_leaf(t):
+        if is_leaf(t):#首先要判断的，因为到了叶子节点才算的
             if current_sum + label(t) == target:
                 return True
             else:

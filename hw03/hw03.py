@@ -93,7 +93,7 @@ def interleaved_sum(n, odd_term, even_term):
     def interleaved_sum_1(term1, term2,k):
         if(n==k):
             return term1(k)
-        return term1(k)+interleaved_sum_1(term2,term1,k+1)#这真的是轮回交换term1和term2函数，没想到
+        return term1(k)+interleaved_sum_1(term2,term1,k+1)
     return interleaved_sum_1(odd_term,even_term,1)
 
 
@@ -154,7 +154,7 @@ def count_coins(total):
             return 0
         elif(total==0):
             return 1
-        a=helper(largestcoin,total-largestcoin)
+        a=helper(largestcoin,total-largestcoin) #递归，你在这里开始调用函数，会直到你结束这次才开始下一个语句
         b=helper(next_smaller_coin(largestcoin),total)
         return a+b
     return helper(25,total)
@@ -198,6 +198,17 @@ def move_stack(n, start, end):
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
+    with_tower=2
+    helper(n, start, with_tower,end)
+
+def helper(n, start, with_tower,end):
+    if(n>=1):
+        helper(n-1,start,end,with_tower)
+        print_move(start,end)
+        helper(n-1,with_tower,start,end)
+
+
+
 
 
 from operator import sub, mul
@@ -213,5 +224,10 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    return (lambda f: lambda k: f(f, k))(lambda g, k: k if k == 1 else mul(k, g(g, sub(k, 1))))
+"""
+这lambda其实就是套娃,你一个关系写不完就在lambda里面继续写,直到你写完关系了。
+这里其实就是外部是里面(lambda f: lambda k: f(f, k))这个lambda表达式的一个参数,(其实就是作为关系函数f),而要传进第二个参数才能
+调用这个表达式，第二个参数就是传进去的数字(例如5),这样里面的lambda表达式就可以实现递归f(f, k),通过这个
+"""
 

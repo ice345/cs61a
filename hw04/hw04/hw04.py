@@ -6,6 +6,7 @@ def filter(condition, lst):
     [2, 0]
     """
     "*** YOUR CODE HERE ***"
+    return list(filter(condition, lst))
 
 
 def deep_map_mut(func, lst):
