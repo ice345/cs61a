@@ -103,6 +103,9 @@ test = {
           >>> near_place.add_insect(near_bee)
           >>> far_place.add_insect(far_bee)
           >>> nearest_bee = thrower.nearest_bee()
+          >>> thrower.place is ant_place    # Don't change self.place!
+          c7a88a0ffd3aef026b98eef6e7557da3
+          # locked
           >>> nearest_bee is far_bee
           03456a09f22295a39ca84d133a26f63d
           # locked

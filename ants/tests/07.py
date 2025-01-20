@@ -21,13 +21,13 @@ test = {
           'hidden': False,
           'locked': True,
           'multiline': False,
-          'question': 'Should turns_to_chew be an instance or class attribute? Why?'
+          'question': 'Should cooldown be an instance or class attribute? Why?'
         },
         {
-          'answer': '2d3708b34a9664cac245c99e8e798efe',
+          'answer': 'de71be3fec0cba010db49e459529fa5e',
           'choices': [
-            'When it is not chewing, i.e. when its turns_to_chew attribute is 0',
-            'When it is chewing, i.e. when its turns_to_chew attribute is at least 1',
+            'When it is not chewing, i.e. when its cooldown attribute is 0',
+            'When it is chewing, i.e. when its cooldown attribute is at least 1',
             'Each turn',
             'Whenever a Bee is in its place'
           ],
@@ -65,10 +65,10 @@ test = {
           >>> hungry.health
           d89cf7c79d5a479b0f636734143ed5e6
           # locked
-          >>> hungry.chewing_turns
+          >>> hungry.chew_cooldown
           81a7d27d1a4a958871bb97b545b871db
           # locked
-          >>> hungry.turns_to_chew
+          >>> hungry.cooldown
           73b94a1326ae2e803c3421016112207b
           # locked
           """,
@@ -86,11 +86,11 @@ test = {
           >>> Ant.__init__ = original
           >>> hungry = HungryAnt()
           >>> # Class vs Instance attributes
-          >>> hasattr(HungryAnt, 'turns_to_chew')  # turns_to_chew should be an instance attribute
+          >>> hasattr(HungryAnt, 'cooldown')  # cooldown should be an instance attribute
           False
-          >>> hungry.turns_to_chew  # HungryAnt is ready to eat a bee
+          >>> hungry.cooldown  # HungryAnt is ready to eat a bee
           0
-          >>> HungryAnt.chewing_turns
+          >>> HungryAnt.chew_cooldown
           3
           """,
           'hidden': False,
@@ -206,7 +206,7 @@ test = {
           'code': r"""
           >>> # Testing HungryAnt chew duration looked up on instance
           >>> very_hungry = HungryAnt()  # Add very hungry caterpi- um, ant
-          >>> HungryAnt.chewing_turns = 0
+          >>> HungryAnt.chew_cooldown = 0
           >>> place = gamestate.places["tunnel_0_0"]
           >>> place.add_insect(very_hungry)
           >>> for _ in range(100):
@@ -301,7 +301,7 @@ test = {
           'code': r"""
           >>> # Testing HungryAnt chooses a random bee in its Place, and that it reduces that bee's health to 0.
           >>> hungry = HungryAnt()
-          >>> HungryAnt.chewing_turns = 0
+          >>> HungryAnt.chew_cooldown = 0
           >>> place = gamestate.places["tunnel_0_0"]
           >>> place.add_insect(hungry)
           >>> first_bee_chosen_count = 0

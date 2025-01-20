@@ -77,11 +77,11 @@ test = {
           >>> gamestate.food
           c9452203eb0b0f0bd2454586a6c2fc5c
           # locked
-          >>> harvester.action(gamestate)
+          >>> harvester.action(gamestate) # executing harvester's action method. this symbolizes the ant taking one turn.
           >>> gamestate.food
           62674984f877ec783f37e8b8b9c264d0
           # locked
-          >>> harvester.action(gamestate)
+          >>> harvester.action(gamestate) # harvester's action is executed again.
           >>> gamestate.food
           50ae32be3e31df6c59633df7fdfb3a72
           # locked
