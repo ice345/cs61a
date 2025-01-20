@@ -231,7 +231,8 @@ if __name__ == '__main__':
     display_messages(open_port)
     webbrowser.open("http://localhost:" + str(open_port), new=0, autoraise=True)
     sys.tracebacklimit = 1
-    app.run(debug=False, port=open_port)
+    socketio.run(app, debug=False, port=open_port)
+
 
 
 """

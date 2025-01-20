@@ -349,58 +349,80 @@ class QueenAnt(ThrowerAnt):
         # END Problem 12
 
 
+################
+# Extra Challenge #
+################
+
+class SlowThrower(ThrowerAnt):
+    """ThrowerAnt that causes Slow on Bees."""
+
+    name = 'Slow'
+    food_cost = 6
+    # BEGIN Problem EC 1
+    implemented = False   # Change to True to view in the GUI
+    # END Problem EC 1
+
+    def throw_at(self, target):
+        # BEGIN Problem EC 1
+        "*** YOUR CODE HERE ***"
+        # END Problem EC 1
 
 
-############
-# Optional #
-############
+class ScaryThrower(ThrowerAnt):
+    """ThrowerAnt that intimidates Bees, making them back away instead of advancing."""
+
+    name = 'Scary'
+    food_cost = 6
+    # BEGIN Problem EC 2
+    implemented = False   # Change to True to view in the GUI
+    # END Problem EC 2
+
+    def throw_at(self, target):
+        # BEGIN Problem EC 2
+        "*** YOUR CODE HERE ***"
+        # END Problem EC 2
+
 
 class NinjaAnt(Ant):
-    """NinjaAnt does not block the path and damages all bees in its place.
-    This class is optional.
-    """
+    """NinjaAnt does not block the path and damages all bees in its place."""
 
     name = 'Ninja'
     damage = 1
     food_cost = 5
     # OVERRIDE CLASS ATTRIBUTES HERE
-    # BEGIN Problem Optional 1
+    # BEGIN Problem EC 3
     implemented = False   # Change to True to view in the GUI
-    # END Problem Optional 1
+    # END Problem EC 3
 
     def action(self, gamestate):
-        # BEGIN Problem Optional 1
+        # BEGIN Problem EC 3
         "*** YOUR CODE HERE ***"
-        # END Problem Optional 1
-
-############
-# Statuses #
-############
+        # END Problem EC 3
 
 
 class LaserAnt(ThrowerAnt):
-    # This class is optional. Only one test is provided for this class.
+    """ThrowerAnt that damages all Insects standing in its path."""
 
     name = 'Laser'
     food_cost = 10
     # OVERRIDE CLASS ATTRIBUTES HERE
-    # BEGIN Problem Optional 2
+    # BEGIN Problem EC 4
     implemented = False   # Change to True to view in the GUI
-    # END Problem Optional 2
+    # END Problem EC 4
 
     def __init__(self, health=1):
         super().__init__(health)
         self.insects_shot = 0
 
     def insects_in_front(self):
-        # BEGIN Problem Optional 2
+        # BEGIN Problem EC 4
         return {}
-        # END Problem Optional 2
+        # END Problem EC 4
 
     def calculate_damage(self, distance):
-        # BEGIN Problem Optional 2
+        # BEGIN Problem EC 4
         return 0
-        # END Problem Optional 2
+        # END Problem EC 4
 
     def action(self, gamestate):
         insects_and_distances = self.insects_in_front()
@@ -422,6 +444,7 @@ class Bee(Insect):
     damage = 1
     is_waterproof = True
 
+
     def sting(self, ant):
         """Attack an ANT, reducing its health by 1."""
         ant.reduce_health(self.damage)
@@ -434,9 +457,9 @@ class Bee(Insect):
     def blocked(self):
         """Return True if this Bee cannot advance to the next Place."""
         # Special handling for NinjaAnt
-        # BEGIN Problem Optional 1
+        # BEGIN Problem EC 3
         return self.place.ant is not None
-        # END Problem Optional 1
+        # END Problem EC 3
 
     def action(self, gamestate):
         """A Bee's action stings the Ant that blocks its exit if it is blocked,
@@ -445,6 +468,7 @@ class Bee(Insect):
         gamestate -- The GameState, used to access game state information.
         """
         destination = self.place.exit
+
 
         if self.blocked():
             self.sting(self.place.ant)
@@ -458,6 +482,15 @@ class Bee(Insect):
     def remove_from(self, place):
         place.bees.remove(self)
         super().remove_from(place)
+
+    def scare(self, length):
+        """
+        If this Bee has not been scared before, cause it to attempt to
+        go backwards LENGTH times.
+        """
+        # BEGIN Problem EC 2
+        "*** YOUR CODE HERE ***"
+        # END Problem EC 2
 
 
 class Wasp(Bee):
