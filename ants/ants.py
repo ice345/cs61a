@@ -148,28 +148,14 @@ class Ant(Insect):
         Insect.remove_from(self, place)
 
     def double(self):
-        """Double this ants's damage, if it has not already been doubled."""
+        """Double this ant's damage, if it has not already been doubled."""
         # BEGIN Problem 12
-        "*** YOUR CODE HERE ***"
-        # 单独处理非BodyguardAnt的情况
-        if not self.doubled and not isinstance(self, BodyguardAnt):
+        if not self.doubled:
             self.damage *= 2
             self.doubled = True
-        if isinstance(self, BodyguardAnt):
-            if self.ant_contained:
-                if self.ant_contained.doubled == False:
-                    self.ant_contained.double()
-                    self.ant_contained.doubled = True
-                
-                if self.doubled == False:
-                    self.damage *= 2
-                    self.doubled = True
-                    
-            # 容器内没有Ant
-            if self.ant_contained == None:
-                if self.doubled == False:
-                    self.damage *= 2
-                    self.doubled = True
+    
+        if isinstance(self, BodyguardAnt) and self.ant_contained and not self.ant_contained.doubled:
+            self.ant_contained.double()
         # END Problem 12
 
 
