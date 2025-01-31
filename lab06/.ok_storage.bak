@@ -2,3 +2,7 @@
 'count_occurrences-correct', (512, 66)
 'repeated-correct', (1024, 66)
 'partial_reverse-correct', (1536, 66)
+'Account-correct', (2048, 70)
+'Client-correct', (2560, 70)
+'make_change-correct', (3072, 70)
+'ChangeMachine-correct', (3584, 70)
